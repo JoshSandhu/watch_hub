@@ -1,3 +1,22 @@
 from django.contrib import admin
+from .models import Product, Review
+from django_summernote.admin import SummernoteModelAdmin
 
 # Register your models here.
+
+@admin.register(Product)
+
+class ProductAdmin(SummernoteModelAdmin):
+
+    list_display = ('title', 'slug', 'status')
+    search_fields = ['title', 'content']
+    prepopulated_fields = {'slug': ('title',)}
+    summernote_fields = ('content')
+
+@admin.register(Review)
+
+class ReviewAdmin(admin.ModelAdmin):
+
+    list_display = ('name', 'body', 'product', 'created_on', 'approved')
+    list_filter = ('approved', 'created_on')
+    search_fields = ['name', 'email', 'body']

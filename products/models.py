@@ -10,7 +10,7 @@ STATUS = ((0, "Out of stock"), (1, "In stock"))
 class Product(models.Model):
     title = models.CharField(max_length=200)
     slug = models.SlugField(max_length=200, unique=True)
-    brand = models.ForeignKey(User, on_delete=models.CASCADE, related_name="product_info")
+    brand = models.CharField(max_length=200)
     content = models.TextField()
     featured_image = CloudinaryField('image', default='placeholder')
     excerpt = models.TextField(blank=True)
